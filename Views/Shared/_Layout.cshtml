@@ -1,0 +1,88 @@
+﻿@*
+    //-----------------------------------------------------------------------------
+    //  Copyright (c) 2014 by Dell Inc.
+    //
+    // All rights reserved.  This software may not be copied, disclosed,
+    // transferred, or used except in accordance with a license granted
+    // by Dell Inc.  This software embodies proprietary information
+    // and trade secrets of Dell Inc.
+    //
+    //-----------------------------------------------------------------------------
+*@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie10 lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie10 lt-ie9"> <![endif]-->
+<!--[if IE 9]>         <html class="no-js lt-ie10"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html class="no-js">
+<!--<![endif]-->
+<head>
+    @{
+        if (ViewBag.User != null)
+        {
+            Response.Headers.Add("X-Ajax", "True");
+        }
+        else
+        {
+            Response.Headers.Add("X-Ajax", "False");
+        }
+    }
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>IDE | @ViewBag.Title</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    @Scripts.Render("//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js")
+    <script>window.jQuery || document.write('<script src="/library/js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+</head>
+<body>
+    <div class="page">
+        <!--[if lt IE 9]><p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p><![endif]-->
+        @Html.Partial("_Header")
+        @RenderBody()
+        @Html.Partial("_Footer")
+    </div>
+    <!-- end .page -->
+    @*<script type="text/javascript">
+            var dpack = {
+                settings : @Html.Raw(Json.Encode(new {
+                    sessiontimeout = 60
+                      }))
+            };
+        </script>*@
+    @if (ViewBag.User == null)
+    {
+        // Indicate to disable the infobar functionality if the user is not logged in.
+        <script type="text/javascript">
+            window.infoBarDisabled = true;
+        </script>
+    }
+    @if (ViewBag.User == null)
+    {
+        // If the user is not logged in, prevent the drag/drop from doing anything.
+        <script type="text/javascript">
+            $(function () {
+                document.ondragover = document.ondragleave = document.ondrop = function (e) {
+                    e.preventDefault();
+                };
+            });
+        </script>
+    }
+
+    @RenderSection("scripts", required: false)
+
+    <script>
+        (function (b, o, i, l, e, r) {
+            b.GoogleAnalyticsObject = l; b[l] || (b[l] =
+                function () { (b[l].q = b[l].q || []).push(arguments) }); b[l].l = +new Date;
+            e = o.createElement(i); r = o.getElementsByTagName(i)[0];
+            e.src = '//www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e, r)
+        }(window, document, 'script', 'ga'));
+        ga('create', 'UA-XXXXX-X'); ga('send', 'pageview');
+    </script>
+
+</body>
+</html>

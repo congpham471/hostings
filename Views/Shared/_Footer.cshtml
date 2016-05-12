@@ -1,0 +1,50 @@
+﻿@*
+    //-----------------------------------------------------------------------------
+    //  Copyright (c) 2014 by Dell Inc.
+    //
+    // All rights reserved.  This software may not be copied, disclosed,
+    // transferred, or used except in accordance with a license granted
+    // by Dell Inc.  This software embodies proprietary information
+    // and trade secrets of Dell Inc.
+    //
+    //-----------------------------------------------------------------------------
+*@
+<script>
+    $(function () {
+        $('footer li, header .ss li').change(function (e) {
+            var dataValue = $(e.target).val(),
+                link = '/culture/setculture?culturecode=' + dataValue;
+
+            $.post(link, function (results) {
+                location.reload();
+            });
+
+        });
+    });
+    
+</script>
+<footer class="container">
+    <div class="inner">
+        <ul>
+            <li>
+                <select class="up" name="anything-the-world" id="selectCulture">
+                    <option value="en-US" @(System.Threading.Thread.CurrentThread.CurrentUICulture.Name == "en-US" ? "selected" : "")>English</option>
+                    <option value="es-ES" @(System.Threading.Thread.CurrentThread.CurrentUICulture.Name == "es-ES" ? "selected" : "")>Spanish</option>
+                    <option value="fr-FR" @(System.Threading.Thread.CurrentThread.CurrentUICulture.Name == "fr-FR" ? "selected" : "")>French</option>
+                    <option value="de-DE" @(System.Threading.Thread.CurrentThread.CurrentUICulture.Name == "de-DE" ? "selected" : "")>German</option>
+                </select>
+            </li>
+
+        </ul>
+    </div>
+</footer>
+
+<div id="modal-dark"></div>
+
+<div id="modal-light">
+    <div class="content">
+        <div id="modal-light-inner" class="inner"></div>
+    </div>
+</div>
+
+<div id="overlay"></div>

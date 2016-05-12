@@ -1,0 +1,11 @@
+﻿@if (ViewBag.User!=null)
+{
+    <li><a href="#"><span class="glyphicon glyphicon-user"></span>Welcome @ViewBag.User.FirstName</a></li>
+    <li> 
+            @Html.ActionLink("Log Off", "LogOut", "Account")
+    </li>
+}
+else
+{
+    <li>@Html.ActionLink("Log On", "Login", "Account")</li>
+}

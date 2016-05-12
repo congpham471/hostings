@@ -1,0 +1,74 @@
+﻿@model Web.UI.Models.LoginViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script>
+    $(function () {
+        if ($('#IsLogInUser').val() == 'invalid') {
+            $('#myModal').modal();
+        }
+        console.log('%cStop!', 'font-size: 50px; font-weight: bold; color: #F00; text-shadow: 1px 1px #000, -1px -1px #000, -1px 1px #000, 1px -1px #000');
+    });
+</script>
+
+
+<section class="container content-block-blue login-content-block">
+<div class="inner">
+    @using (Html.BeginForm("login", "account", FormMethod.Post))
+    {
+        <div class="login">
+            <h1>@Localization.Get("Login", "_Page_Views_Account_Login_cshtml")</h1>
+            <div class="field">
+                <label>@Localization.Get("Email", "_Page_Views_Account_Login_cshtml")</label>
+                @Html.TextBoxFor(m => m.Email)
+                @Html.ValidationMessageFor(m => m.Email)
+            </div>
+            <div class="field">
+                <label>@Localization.Get("Password", "_Page_Views_Account_Login_cshtml")</label>
+                @Html.PasswordFor(m => m.Password)
+                @Html.ValidationMessageFor(m => m.Password)
+            </div>
+
+
+            <div class="actions right">
+                <ul>
+                    <li>
+                        <button class="button regular label-offset">@Localization.Get("Login", "_Page_Views_Account_Login_cshtml")</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    }
+</div>
+    @*<div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body text-center">
+                    <p>UserName or Password is invalid</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+    <input type="radio" name="groupRd" class="groupRd" value="France" />France
+    <input type="radio" name="groupRd" class="groupRd" value="Britain" />Britain
+    <p></p>
+    <input type="radio" name="groupRd" class="group2" value="France" />Paris
+    <input type="radio" name="groupRd" class="group2" value="Britain" />London
+    <script>
+        $(function () {
+            $('.groupRd').change(function () {
+                var currentLocation = window.location
+                alert();
+                //window.location.href = "http://localhost:39019/Account/Login?country=" + $(this).val();
+            });
+        });
+    </script>
+</section>
